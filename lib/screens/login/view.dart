@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gestao/data/sys_current.dart';
+import 'package:gestao/screens/index/view.dart';
 import 'package:gestao/screens/login/components.dart';
 import 'package:gestao/screens/login/model.dart';
-import 'package:gestao/services/storage.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -20,9 +19,24 @@ class _LoginScreenState extends State<LoginScreen> {
   String get userName => _userController.text.trim();
   String get password => _passwordController.text.trim();
 
-  void submit() async {
+  Future<void> submit() async {
     AuthService auth = AuthService();
-    String result = await auth.login(userName, password);
+
+    await auth.login(userName, password);
+
+    if (!mounted) return;
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const IndexScreen()),
+    );
+  }
+
+  @override
+  void dispose() {
+    _userController.dispose();
+    _passwordController.dispose();
+    super.dispose();
   }
 
   @override
