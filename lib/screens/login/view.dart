@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:gestao/data/sys_current.dart';
 import 'package:gestao/screens/login/components.dart';
 import 'package:gestao/screens/login/model.dart';
+import 'package:gestao/services/storage.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -19,10 +21,8 @@ class _LoginScreenState extends State<LoginScreen> {
   String get password => _passwordController.text.trim();
 
   void submit() async {
-    Login login = Login();
-    String result = await login.login(userName, password);
-
-    print('result $result');
+    AuthService auth = AuthService();
+    String result = await auth.login(userName, password);
   }
 
   @override

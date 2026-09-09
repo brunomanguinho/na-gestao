@@ -1,12 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:gestao/data/sys_current.dart';
+import 'package:gestao/screens/index/view.dart';
+import 'package:gestao/screens/login/model.dart';
 import 'package:gestao/screens/login/view.dart';
 
 void main() {
   runApp(const MainApp());
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class MainApp extends StatefulWidget {
+  const new({super.key});
+
+  @override
+  State<MainApp> createState() => _MainAppState();
+}
+
+class _MainAppState extends State<MainApp> {
+  bool _loading = true;
+
+  Future<void> _restoreSession() async {
+    await AuthService().restoreSession();
+
+    setState(() {
+      _loading = false;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _restoreSession();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +58,11 @@ class MainApp extends StatelessWidget {
           ),
         ),
       ),
-      home: LoginScreen(),
+      home: _loading
+          ? const CircularProgressIndicator()
+          : SysCurrent.token == null
+          ? LoginScreen()
+          : IndexScreen(),
     );
   }
 }
