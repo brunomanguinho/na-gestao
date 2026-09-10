@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gestao/data/sys_current.dart';
+import 'package:gestao/screens/auth/authenticator.dart';
 import 'package:gestao/screens/index/view.dart';
-import 'package:gestao/screens/login/model.dart';
-import 'package:gestao/screens/login/view.dart';
 
 void main() {
   runApp(const MainApp());
@@ -16,22 +14,6 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
-  bool _loading = true;
-
-  Future<void> _restoreSession() async {
-    await AuthService().restoreSession();
-
-    setState(() {
-      _loading = false;
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _restoreSession();
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -58,11 +40,11 @@ class _MainAppState extends State<MainApp> {
           ),
         ),
       ),
-      home: _loading
-          ? const CircularProgressIndicator()
-          : SysCurrent.token == null
-          ? LoginScreen()
-          : IndexScreen(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const Authenticator(),
+        '/index': (context) => const IndexScreen(),
+      },
     );
   }
 }
