@@ -1,6 +1,7 @@
 import 'package:gestao/data/sys_current.dart';
 import 'package:gestao/data/usuario.dart';
 import 'package:gestao/services/api.dart';
+import 'package:gestao/services/exceptions.dart';
 import 'package:gestao/services/http_package.dart';
 
 import 'package:gestao/services/storage.dart';
@@ -19,13 +20,20 @@ class AuthService {
       params,
     );
 
+    print("RESPONSE $response");
+
     HttpPackage<Usuario> httpPackage = HttpPackage.fromMap(
       response,
       Usuario.fromMap,
     );
 
+    if (!httpPackage.success) {
+      throw ApiCodeException(code: httpPackage.error!.code);
+    }
+
     await writeToken((httpPackage.data as Usuario).Token);
 
+    print("returning package??");
     return httpPackage;
   }
 

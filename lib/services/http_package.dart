@@ -1,13 +1,13 @@
 class ErrorPackage {
   factory ErrorPackage.fromMap(Map<String, dynamic> data) {
     return ErrorPackage(
-      code: data['code'] as int?,
+      code: data['code'] as int,
       message: data['message'] as String?,
     );
   }
-  ErrorPackage({this.code, this.message});
+  ErrorPackage({required this.code, this.message});
 
-  int? code;
+  int code;
   String? message;
 }
 
