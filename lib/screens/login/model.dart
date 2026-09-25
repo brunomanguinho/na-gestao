@@ -27,6 +27,8 @@ class AuthService {
       Usuario.fromMap,
     );
 
+    print("CONVERTED $httpPackage");
+
     if (!httpPackage.success) {
       throw ApiCodeException(code: httpPackage.error!.code);
     }

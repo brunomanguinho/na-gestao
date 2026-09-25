@@ -3,7 +3,6 @@ import 'package:gestao/screens/index/view.dart';
 import 'package:gestao/screens/login/components.dart';
 import 'package:gestao/screens/login/model.dart';
 import 'package:gestao/services/exceptions.dart';
-import 'package:gestao/services/http_package.dart';
 import 'package:motion_toast/motion_toast.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -34,18 +33,25 @@ class _LoginScreenState extends State<LoginScreen> {
         context,
         MaterialPageRoute(builder: (context) => const IndexScreen()),
       );
-    } on StatusCodeException catch (e) {
+    } on ApplicationException catch (e) {
       MotionToast.error(
         title: Text('Erro'),
-        description: Text(e.toString()),
-      ).show(context);
-    } on ApiCodeException catch (e) {
-      MotionToast.error(
-        title: Text('Erro de aplicação'),
         description: Text(e.toString()),
         height: 120,
       ).show(context);
     }
+    // } on StatusCodeException catch (e) {
+    //   MotionToast.error(
+    //     title: Text('Erro'),
+    //     description: Text(e.toString()),
+    //   ).show(context);
+    // } on ApiCodeException catch (e) {
+    //   MotionToast.error(
+    //     title: Text('Erro de aplicação'),
+    //     description: Text(e.toString()),
+    //     height: 120,
+    //   ).show(context);
+    // }
   }
 
   @override

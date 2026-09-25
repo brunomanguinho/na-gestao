@@ -9,7 +9,9 @@ class ApplicationException implements Exception {
 
   @override
   String toString() {
-    return 'Erro ao realizar processamento [Código $code]: $message';
+    return code < 0
+        ? 'Erro ao realizar processamento [Código $code]: $message'
+        : '$message';
   }
 }
 

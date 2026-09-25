@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 class Usuario {
   factory Usuario.fromMap(Map<String, dynamic> data) {
     final int id = data["ID"];

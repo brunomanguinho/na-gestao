@@ -56,7 +56,6 @@ class PasswordTextField extends StatefulWidget {
 }
 
 class _PasswordTextFieldState extends State<PasswordTextField> {
-  final TextEditingController _textEditingController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return TextFormField(
