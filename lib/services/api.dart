@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:io';
 
+import 'package:gestao/data/sys_current.dart';
 import 'package:gestao/services/exceptions.dart';
 import 'package:gestao/services/http_package.dart';
 import 'package:http/http.dart';
@@ -15,11 +17,18 @@ class API {
 
     Response response;
     try {
-      response = await get(uri);
+      String token = SysCurrent.token ?? "";
+
+      response = await get(
+        uri,
+        headers: {HttpHeaders.authorizationHeader: 'Bearer $token'},
+      );
 
       if (response.statusCode != 200) {
         throw StatusCodeException(code: response.statusCode);
       }
+    } on StatusCodeException {
+      rethrow;
     } catch (e) {
       throw ApiCodeException(code: -1002);
     }

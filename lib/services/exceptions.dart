@@ -11,7 +11,7 @@ class ApplicationException implements Exception {
   String toString() {
     return code < 0
         ? 'Erro ao realizar processamento [Código $code]: $message'
-        : '$message';
+        : 'Erro ao realizar processamento [Código $code]: $message'; //'$message';
   }
 }
 
@@ -68,7 +68,7 @@ enum ApiCodeError {
   ),
   unreach(
     code: -1002,
-    message: "Parece que nossos servidores estão fora de serviço. Tente novamente mais tarde",
+    message: "Parece que nossos servidores estão fora de serviço. Tente novamente mais tarde.",
   );
 
   const ApiCodeError({required this.code, this.message});
