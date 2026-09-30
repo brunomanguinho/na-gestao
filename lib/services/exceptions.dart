@@ -50,11 +50,6 @@ class StatusCodeException extends ApplicationException implements Exception {
 
   @override
   String? get message => errorType.message;
-
-  // @override
-  // String toString() {
-  //   return 'Erro ao realizar processamento [Código $code]: ${errorType.message}';
-  // }
 }
 
 enum ApiCodeError {
@@ -99,9 +94,4 @@ class ApiCodeException extends ApplicationException implements Exception {
 
   @override
   String? get message => apiMessage ?? errorType.message;
-
-  // @override
-  // String toString() {
-  //   return 'Erro ao realizar processamento. [Código ${errorType.code}]: $userMessage';
-  // }
 }

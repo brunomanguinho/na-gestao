@@ -14,7 +14,6 @@ class API {
     final uri = Uri.http(endPoint, route, params);
 
     Response response;
-    //try {
     try {
       response = await get(uri);
 
@@ -28,7 +27,7 @@ class API {
     Map<String, Object?> json =
         jsonDecode(response.body) as Map<String, Object?>;
 
-    if (json['error'] != null) {
+    if ((json['error'] != null) && ((json['error'] as Map).isNotEmpty)) {
       final Map<String, dynamic> error = json['error'] as Map<String, dynamic>;
       final ErrorPackage errorPackage = ErrorPackage.fromMap(error);
 
@@ -39,8 +38,5 @@ class API {
     }
 
     return json;
-    //} catch (e) {
-    //throw ApiCodeException(code: -1002);
-    //}
   }
 }
