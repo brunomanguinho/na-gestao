@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gestao/views/index/screens/home.dart';
 
 class IndexScreen extends StatefulWidget {
   const new({super.key});
@@ -23,7 +24,19 @@ class _IndexScreenState extends State<IndexScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(child: Text("Index Area")),
+      body: SafeArea(
+        child: IndexedStack(
+          index: _selectedTab,
+          children: [
+            HomeScreen(
+              onNavigate: (index) {
+                setState(() => _selectedTab = index);
+              },
+            ),
+            Text("Index2"),
+          ],
+        ),
+      ),
       bottomNavigationBar: NavigationBar(
         destinations: tabs,
         selectedIndex: _selectedTab,

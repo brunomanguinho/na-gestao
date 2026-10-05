@@ -2,16 +2,43 @@ import 'package:flutter/material.dart';
 import 'package:gestao/services/exceptions.dart';
 import 'package:motion_toast/motion_toast.dart';
 
-class LogoImage extends StatelessWidget {
-  const new({super.key, required this.width, required this.height});
+class FavIcon extends StatelessWidget {
+  const FavIcon({super.key, this.white = false});
 
-  final double width;
-  final double height;
+  final bool white;
+  final double width = 42.0;
+  final double heigth = 42.0;
 
   @override
   Widget build(BuildContext context) {
     return Image(
-      image: AssetImage('assets/images/logo.png'),
+      image: !white
+          ? AssetImage('assets/images/favicon.png')
+          : AssetImage('assets/images/favicon-white.png'),
+      width: width,
+      height: heigth,
+    );
+  }
+}
+
+class LogoImage extends StatelessWidget {
+  const new({
+    super.key,
+    required this.width,
+    required this.height,
+    this.white = false,
+  });
+
+  final double width;
+  final double height;
+  final bool white;
+
+  @override
+  Widget build(BuildContext context) {
+    return Image(
+      image: !white
+          ? AssetImage('assets/images/logo.png')
+          : AssetImage('assets/images/logo-white.png'),
       width: width,
       height: height,
     );

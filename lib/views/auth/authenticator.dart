@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gestao/data/sys_current.dart';
-import 'package:gestao/screens/index/view.dart';
-import 'package:gestao/screens/login/model.dart';
-import 'package:gestao/screens/login/view.dart';
+import 'package:gestao/views/index/view.dart';
+import 'package:gestao/views/login/model.dart';
+import 'package:gestao/views/login/view.dart';
 import 'package:gestao/ui/components.dart';
 
 class Authenticator extends StatefulWidget {
