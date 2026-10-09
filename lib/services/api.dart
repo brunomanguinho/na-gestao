@@ -1,19 +1,18 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:gestao/config/app_config.dart';
 import 'package:gestao/data/sys_current.dart';
 import 'package:gestao/services/exceptions.dart';
 import 'package:gestao/services/http_package.dart';
 import 'package:http/http.dart';
 
 class API {
-  static const String endPoint = 'localhost:3001';
-
   static Future<Map<String, dynamic>> GET(
     String route,
     Map<String, dynamic> params,
   ) async {
-    final uri = Uri.http(endPoint, route, params);
+    final uri = Uri.http(AppConfig.apiEndpoint, route, params);
 
     Response response;
     try {

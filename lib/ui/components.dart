@@ -115,3 +115,69 @@ class Toastie {
   ToastieKind get _kind => getKind();
   String get _title => getTitle();
 }
+
+class NotificationButton extends StatelessWidget {
+  const NotificationButton({
+    super.key,
+    required this.onPressed,
+    this.color = Colors.white,
+  });
+
+  final Function onPressed;
+  final Color? color;
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      onPressed: () => {onPressed},
+      icon: Icon(Icons.notifications_none_rounded, color: color),
+      tooltip: 'Notificações',
+    );
+  }
+}
+
+class FloatContainer extends StatelessWidget {
+  const FloatContainer({
+    super.key,
+    required this.onTap,
+    required this.children,
+    this.offset,
+  });
+
+  final Function onTap;
+  final List<Widget> children;
+  final Offset? offset;
+
+  Offset get _offset => offset ?? Offset(0, -30);
+
+  @override
+  Widget build(BuildContext context) {
+    return Transform.translate(
+      offset: _offset,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            InkWell(
+              onTap: () => {onTap},
+              child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFFFF8F1),
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(color: const Color(0xFFF0DCCC)),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  // children: children,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
