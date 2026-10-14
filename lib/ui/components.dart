@@ -171,7 +171,7 @@ class FloatContainer extends StatelessWidget {
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  // children: children,
+                  children: children,
                 ),
               ),
             ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gestao/views/index/screens/home.dart';
+import 'package:gestao/views/index/screens/profile.dart';
 
 class IndexScreen extends StatefulWidget {
   const new({super.key});
@@ -33,7 +34,7 @@ class _IndexScreenState extends State<IndexScreen> {
                 setState(() => _selectedTab = index);
               },
             ),
-            Text("Index2"),
+            ProfileScreen(),
           ],
         ),
       ),

@@ -28,14 +28,17 @@ class AuthService {
       throw ApiCodeException(code: httpPackage.error!.code);
     }
 
-    await writeToken((httpPackage.data as Usuario).Token);
+    await writeUserData((httpPackage.data as Usuario));
 
     return httpPackage;
   }
 
-  Future<void> writeToken(String token) async {
-    await Storage.writeData('token', token);
-    SysCurrent.token = token;
+  Future<void> writeUserData(Usuario usuario) async {
+    await Storage.writeData('token', usuario.Token);
+    await Storage.writeData('username', usuario.Nome);
+
+    SysCurrent.token = usuario.Token;
+    SysCurrent.username = usuario.Nome;
   }
 
   Future<void> restoreSession() async {
