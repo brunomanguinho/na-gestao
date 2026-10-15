@@ -4,6 +4,32 @@ import 'package:gestao/config/app_config.dart';
 import 'package:gestao/data/sys_current.dart';
 import 'package:gestao/views/index/components.dart';
 
+class EmptyAvatar extends StatelessWidget {
+  const EmptyAvatar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: const Color.fromARGB(148, 43, 85, 88),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      width: 98,
+      height: 98,
+      child: Center(
+        child: Text(
+          "B M",
+          style: TextStyle(
+            color: AppColors.textColor,
+            fontWeight: FontWeight.bold,
+            fontSize: 36,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
@@ -25,25 +51,8 @@ class ProfileScreen extends StatelessWidget {
                 Column(
                   children: [
                     Padding(
-                      padding: EdgeInsetsGeometry.only(top: 20, bottom: 20),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: const Color.fromARGB(148, 43, 85, 88),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        width: 98,
-                        height: 98,
-                        child: Center(
-                          child: Text(
-                            "B M",
-                            style: TextStyle(
-                              color: AppColors.textColor,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 36,
-                            ),
-                          ),
-                        ),
-                      ),
+                      padding: EdgeInsetsGeometry.all(20),
+                      child: EmptyAvatar(),
                     ),
                     Text(
                       SysCurrent.username.toString(),
