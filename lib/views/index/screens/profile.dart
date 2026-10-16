@@ -5,7 +5,16 @@ import 'package:gestao/data/sys_current.dart';
 import 'package:gestao/views/index/components.dart';
 
 class EmptyAvatar extends StatelessWidget {
-  const EmptyAvatar({super.key});
+  const EmptyAvatar({
+    super.key,
+    required this.initials,
+    required this.width,
+    required this.heigth,
+  });
+
+  final String initials;
+  final double width;
+  final double heigth;
 
   @override
   Widget build(BuildContext context) {
@@ -14,17 +23,61 @@ class EmptyAvatar extends StatelessWidget {
         color: const Color.fromARGB(148, 43, 85, 88),
         borderRadius: BorderRadius.circular(20),
       ),
-      width: 98,
-      height: 98,
+      width: width,
+      height: heigth,
       child: Center(
         child: Text(
-          "B M",
+          initials,
           style: TextStyle(
             color: AppColors.textColor,
             fontWeight: FontWeight.bold,
             fontSize: 36,
           ),
         ),
+      ),
+    );
+  }
+}
+
+class UserCard extends StatelessWidget {
+  const UserCard({super.key, required this.name, this.role});
+
+  final String name;
+  final String? role;
+
+  String getInitials() {
+    List<String> parts = name.split(' ');
+    return '${parts[0][0]} ${parts[parts.length - 1][0]}';
+  }
+
+  String get _initials => getInitials();
+
+  Widget get _roleWidget => role != null ? Text(role!) : SizedBox.shrink();
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Column(
+            children: [
+              Padding(
+                padding: EdgeInsetsGeometry.all(20),
+                child: EmptyAvatar(initials: _initials, width: 98, heigth: 98),
+              ),
+              Text(
+                name,
+                style: TextStyle(
+                  color: AppColors.textColor,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+              _roleWidget,
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -44,29 +97,9 @@ class ProfileScreen extends StatelessWidget {
         ),
         Padding(
           padding: EdgeInsetsGeometry.all(30),
-          child: Card(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsetsGeometry.all(20),
-                      child: EmptyAvatar(),
-                    ),
-                    Text(
-                      SysCurrent.username.toString(),
-                      style: TextStyle(
-                        color: AppColors.textColor,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w800,
-                      ),
-                    ),
-                    Text("Analista de T.I."),
-                  ],
-                ),
-              ],
-            ),
+          child: UserCard(
+            name: SysCurrent.username.toString(),
+            role: "Analista de T.I. III",
           ),
         ),
       ],
